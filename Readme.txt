@@ -1,4 +1,4 @@
-- you can find total deliveries in "SWP annual total deliveries" excel file.
+- you can find total deliveries in main/"SWP annual total deliveries" excel file.
 table b-4 is table A
 table b-5a is the annual total deliveries to each SWP contractor. It's the whole thing not just south coast deliveries (delta San Joaquin included). Its up to 2022 which is based on latest release (Main/B132-23 Appendix B 041724.pdf).
 More info can be found on Main/Bulletin 132-19 020323.pdf
