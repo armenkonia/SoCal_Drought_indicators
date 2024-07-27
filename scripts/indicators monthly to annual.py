@@ -9,7 +9,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
 #%%
-sw_indicator = pd.read_csv('../../Indicators/surface_water_indicator.csv')
+sw_indicator = pd.read_csv('../Indicators/surface_water_indicator.csv')
 
 socal_sw = sw_indicator[sw_indicator.HR_NAME == 'South Coast']
 socal_sw['date'] = pd.to_datetime(socal_sw['date'])
@@ -35,7 +35,7 @@ yearly_swdi_sw_sl = yearly_swdi_sw_sl[(yearly_swdi_sw_sl['water_year'] != 2017) 
 # plt.plot(solah_sw['date'],solah_sw['SWDI'])
 plt.plot(yearly_swdi_sw_sl['water_year'],yearly_swdi_sw_sl['SWDI'])
 #%%
-imports_indicator = pd.read_csv('../../Indicators/not preprocessed/total_storage_percentiles - imports.csv')
+imports_indicator = pd.read_csv('../Indicators/not preprocessed/total_storage_percentiles - imports.csv')
 imports_indicator.date = pd.to_datetime(imports_indicator.date)
 imports_indicator['year'] = imports_indicator['date'].dt.year
 imports_indicator['month'] = imports_indicator['date'].dt.month
@@ -46,7 +46,7 @@ yearly_swdi_imports = imports_indicator.groupby('water_year')['SWDI'].mean().res
 yearly_swdi_imports = yearly_swdi_imports[(yearly_swdi_imports['water_year'] != 2017) & (yearly_swdi_imports['water_year'] >= 2002) & (yearly_swdi_imports['water_year'] <= 2020)]
 
 #%%
-gw_indicator = pd.read_csv('../../Indicators/not preprocessed/state_wells_regional_analysis_seasonal.csv')
+gw_indicator = pd.read_csv('../Indicators/not preprocessed/state_wells_regional_analysis_seasonal.csv')
 gw_indicator.date = pd.to_datetime(gw_indicator.date)
 socal_gw = gw_indicator[gw_indicator.HR_NAME == 'South Coast']
 # socal_gw = gw_indicator[gw_indicator.HR_NAME == 'San Joaquin River']
@@ -63,7 +63,7 @@ socal_gw = socal_gw[socal_gw.month == 9]
 socal_gw = socal_gw[(socal_gw['year'] != 2017) & (socal_gw['year'] >= 2002) & (socal_gw['year'] <= 2020)]
 
 #%%
-sf_indicator = pd.read_csv('../../Indicators/streamflow_indicator.csv')
+sf_indicator = pd.read_csv('../Indicators/streamflow_indicator.csv')
 sf_col = sf_indicator.loc[sf_indicator.HR_NAME == 'Colorado River']
 
 sf_col.date = pd.to_datetime(sf_col.date)
