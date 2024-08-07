@@ -12,7 +12,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from adjustText import adjust_text
 import numpy as np
-shape_path_filename = r"C:\Users\armen\Downloads\i03_WaterDistricts (1)\i03_WaterDistricts.shp"
+shape_path_filename = r"..\Dataset\i03_WaterDistricts\i03_WaterDistricts.shp"
 ca_wd = gpd.read_file(shape_path_filename).to_crs("EPSG:4326")
 
 
@@ -33,10 +33,10 @@ swp_contractors = pd.DataFrame(data = {
 
 swp_wd = ca_wd[ca_wd['AGENCYNAME'].isin(swp_contractors['AGENCYNAME'])]
 
-shape_path_filename = r"..\HRs\i03_Hydrologic_Regions.shp"
+shape_path_filename = r"..\Dataset\HRs\i03_Hydrologic_Regions.shp"
 hrs = gpd.read_file(shape_path_filename).to_crs("EPSG:4326")
 
-shape_path_filename = r"C:\Users\armen\Downloads\i17_StateWaterProject_Centerline\i17_StateWaterProject_Centerline.shp"
+shape_path_filename = r"..\Dataset\i17_StateWaterProject_Centerline\i17_StateWaterProject_Centerline.shp"
 swp_centerline = gpd.read_file(shape_path_filename).to_crs("EPSG:4326")
 
 swp_wd = swp_wd.to_crs("EPSG:3857")

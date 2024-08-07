@@ -16,7 +16,7 @@ socal_sw['date'] = pd.to_datetime(socal_sw['date'])
 socal_sw['year'] = socal_sw['date'].dt.year
 socal_sw['month'] = socal_sw['date'].dt.month
 socal_sw['water_year'] = socal_sw['year']
-socal_sw.loc[socal_sw['month'] >= 10, 'water_year'] = socal_sw['year'] + 1
+socal_sw.loc[socal_sw['month'] >= 10, 'water_year'] = socal_sw['year'] + 1 #this is to make it water year, if you want in calendar year cross this line
 yearly_swdi_sw_sc = socal_sw.groupby('water_year')['SWDI'].mean().reset_index()
 yearly_swdi_sw_sc = yearly_swdi_sw_sc[(yearly_swdi_sw_sc['water_year'] != 2017) & (yearly_swdi_sw_sc['water_year'] >= 2002) & (yearly_swdi_sw_sc['water_year'] <= 2020)]
 # plt.plot(socal_sw['date'],socal_sw['SWDI'])

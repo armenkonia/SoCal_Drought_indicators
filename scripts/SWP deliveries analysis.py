@@ -70,8 +70,9 @@ table_b5a_no_total_modified.columns = pd.MultiIndex.from_tuples([(b, e) for a, b
 column_names = table_b5a_no_total_modified.columns
 grouped_contractors_df = table_b5a_no_total_modified.groupby(column_names,axis=1).sum()
 grouped_contractors_df.columns = pd.MultiIndex.from_tuples(grouped_contractors_df.columns)
+new_level_0 = grouped_contractors_df.columns.get_level_values(0).to_series().replace('', 'FEATHER RIVER AREA')
+grouped_contractors_df.columns = pd.MultiIndex.from_arrays([new_level_0, grouped_contractors_df.columns.get_level_values(1)])
 #%%
-
 
 # Replace the empty column name with 'FEATHER RIVER AREA'
 new_level_0 = grouped_contractors_df.columns.get_level_values(0).to_series().replace('', 'FEATHER RIVER AREA')
@@ -97,3 +98,36 @@ for hr, branches in hr_mapping.items():
     aggregated_df[hr] = grouped_contractors_df.loc[:, columns_to_sum].sum(axis=1)
     
 #%%
+df = grouped_contractors_df.copy()
+dfs_dict = {}
+
+# Loop through HR and their respective branches to create separate DataFrames
+for hr, branches in hr_mapping.items():
+    columns_to_select = []
+    for branch in branches:
+        if (branch, hr) in df.columns:
+            columns_to_select.append((branch, hr))
+    if columns_to_select:
+        dfs_dict[hr] = df[columns_to_select]
+combined_df = pd.concat(dfs_dict, axis=1)
+# combined_df.columns = pd.MultiIndex.from_tuples([(a, b) for a, b, c in combined_df.columns])
+combined_df.columns = pd.MultiIndex.from_tuples([(b, c) for a, b, c in combined_df.columns])
+
+#%%
+original_columns = set(df.columns)
+
+# Get the combined columns
+combined_columns = set(combined_df.columns)
+
+unused_columns = original_columns - combined_columns
+unused_columns_df = df[list(unused_columns)]
+
+# Sort columns based on the first level
+sorted_columns = sorted(unused_columns_df.columns.get_level_values(0).unique())
+
+# Create a new sorted DataFrame
+sorted_df = unused_columns_df[sorted(sorted_columns, key=lambda x: unused_columns_df.columns.get_level_values(0).tolist().index(x))]
+#%%
+table_b5a_no_total_modified = table_b5a_no_total.copy()
+table_b5a_no_total_modified_ssj = table_b5a_no_total_modified.loc[:, (slice(None), 'SOUTH SAN JOAQUIN DIVISION', slice(None), slice(None))]
+
