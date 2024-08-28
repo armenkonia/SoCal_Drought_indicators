@@ -1,0 +1,5 @@
+ID,Station_Name,River_Basin,County,Longitude,Latitude,ElevationFeet,Operator,OBJECTID,HR_NAME
+HVS,LAKE HAVASU,COLORADO R,SAN BERNARDINO,-114.156,34.317,451,US Bureau of Reclamation,,Colorado River
+MEA,LAKE MEAD,COLORADO R,State of Arizona,-114.736,36.016,"3,700",US Bureau of Reclamation,,Colorado River
+MHV,LAKE MOHAVE,COLORADO R,State of Nevada,-114.567,35.197,644,US Bureau of Reclamation,,Colorado River
+PWL,LAKE POWELL,COLORADO R,State of Arizona,-111.493,36.937,"3,700",US Bureau of Reclamation,,Colorado River
