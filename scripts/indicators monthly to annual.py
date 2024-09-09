@@ -75,18 +75,18 @@ yearly_sf_col = sf_col.groupby('water_year')['percentile'].mean().reset_index()
 yearly_sf_col = yearly_swdi_imports[(yearly_swdi_imports['water_year'] != 2017) & (yearly_swdi_imports['water_year'] >= 2002) & (yearly_swdi_imports['water_year'] <= 2020)]
 
 #%%
-col_indicator = pd.read_csv('total_storage_percentiles.csv')
+col_indicator = pd.read_csv(r"C:\Users\armen\Desktop\Drought Indicators - SoCal\Indicators\not preprocessed\total_storage_percentiles - colorado.csv")
 # col_indicator = pd.read_csv('individual_reservoir_percentiles.csv')
 col_indicator['date'] = pd.to_datetime(col_indicator['date'])
 col_indicator['year'] = col_indicator['date'].dt.year
 col_indicator['month'] = col_indicator['date'].dt.month
 col_indicator['water_year'] = col_indicator['year']
-col_indicator.loc[col_indicator['month'] >= 10, 'water_year'] = col_indicator['year'] + 1 #this is to make it water year, if you want in calendar year cross this line
+# col_indicator.loc[col_indicator['month'] >= 10, 'water_year'] = col_indicator['year'] + 1 #this is to make it water year, if you want in calendar year cross this line
 yearly_swdi_sw_col = col_indicator.groupby('water_year')['percentile'].mean().reset_index()
-# yearly_swdi_sw_col = col_indicator.groupby(['water_year','station'])['percentile'].mean().reset_index()
-# yearly_swdi_sw_col = yearly_swdi_sw_col[(yearly_swdi_sw_col['water_year'] != 2017) & (yearly_swdi_sw_col['water_year'] >= 2002) & (yearly_swdi_sw_col['water_year'] <= 2020)]
+yearly_swdi_sw_col = col_indicator.groupby(['water_year'])['percentile'].mean().reset_index()
+yearly_swdi_sw_col = yearly_swdi_sw_col[(yearly_swdi_sw_col['water_year'] != 2017) & (yearly_swdi_sw_col['water_year'] >= 2002) & (yearly_swdi_sw_col['water_year'] <= 2020)]
 # plt.plot(socal_sw['date'],socal_sw['SWDI'])
-plt.plot(yearly_swdi_sw_col['water_year'],yearly_swdi_sw_col['percentile'])
+# plt.plot(yearly_swdi_sw_col['water_year'],yearly_swdi_sw_col['percentile'])
 
 #%%
 col_div_cu = pd.read_excel(r"C:\Users\armen\Desktop\Drought Indicators - SoCal\Main\Colorado\Colorado Analysis.xlsx",sheet_name='Monthly Div & CU',header=1)
