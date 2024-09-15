@@ -12,8 +12,8 @@ from itertools import combinations
 import numpy as np
 from tqdm import tqdm
 
-excel_path = r"C:\Users\armen\Desktop\Drought Indicators - SoCal\Analysis\Main Analysis.xlsx"
-df = pd.read_excel(excel_path, sheet_name='Sheet1', header=[1], index_col=0)
+excel_path = r"C:\Users\armen\Desktop\Drought Indicators - SoCal\Analysis\Indicator Analysis Results.xlsx"
+df = pd.read_excel(excel_path, sheet_name='Main', header=[1], index_col=0)
 
 df_log = df.copy()
 for col in df_log.columns:
@@ -53,8 +53,8 @@ results = []
 for combo in tqdm(all_combinations):
     X = df[list(combo)]
     # X = df[list(combo) + ['Category']]
-    y = df['SWP']
-    y = np.log10(y + 1e-8)
+    y = df['Groundwater']
+    # y = np.log10(y + 1e-8)
     X = sm.add_constant(X)
     
     model = sm.OLS(y, X).fit()
